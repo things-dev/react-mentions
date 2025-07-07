@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/signavio/react-mentions.git"
+    "url": "https://github.com/things-dev/react-mentions.git"
   },
   "keywords": [
     "react",
@@ -33,12 +33,10 @@
     "safari >= 10",
     "ie >= 11"
   ],
-  "author": "SAP-Signavio",
-  "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/signavio/react-mentions/issues"
+    "url": "https://github.com/things-dev/react-mentions/issues"
   },
-  "homepage": "https://github.com/signavio/react-mentions",
+  "homepage": "https://github.com/things-dev/react-mentions",
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
@@ -86,7 +84,7 @@
     "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
-    "@babel/runtime": "7.4.5",
+    "@babel/runtime": "7.27.6",
     "invariant": "^2.2.4",
     "prop-types": "^15.5.8",
     "substyle": "^9.1.0"
