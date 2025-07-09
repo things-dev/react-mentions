@@ -96,7 +96,6 @@ const propTypes = {
           : PropTypes.instanceOf(Element),
     }),
   ]),
-  inputComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.elementType]),
 
   children: PropTypes.oneOfType([
     PropTypes.element,
@@ -230,18 +229,15 @@ class MentionsInput extends React.Component {
   }
 
   renderControl = () => {
-    let { singleLine, style, inputComponent: CustomInput } = this.props
+    let { singleLine, style } = this.props
     let inputProps = this.getInputProps()
 
     return (
       <div {...style('control')}>
         {this.renderHighlighter()}
-        {CustomInput
-          ? <CustomInput ref={this.setInputRef} {...inputProps} />
-          : singleLine
-            ? this.renderInput(inputProps)
-            : this.renderTextarea(inputProps)
-        }
+        {singleLine
+          ? this.renderInput(inputProps)
+          : this.renderTextarea(inputProps)}
       </div>
     )
   }
