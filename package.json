@@ -15,8 +15,7 @@
     "test": "jest",
     "now-build": "webpack --config demo/webpack.config.js",
     "prerelease": "yarn build",
-    "release": "changeset publish",
-    "change": "changeset"
+    "release": "np --no-tests"
   },
   "repository": {
     "type": "git",
@@ -71,6 +70,7 @@
     "jest": "^24.8.0",
     "jest-enzyme": "^7.0.2",
     "jest-watch-typeahead": "^0.3.1",
+    "np": "^10.2.0",
     "preconstruct": "^0.0.82",
     "prettier": "^1.10.2",
     "react": "16.8.6",
