@@ -230,14 +230,23 @@ var applyChangeToValue = function applyChangeToValue(value, plainTextValue, _ref
       // find start of diff
       spliceStart = 0;
 
-      while (plainTextValue[spliceStart] === controlPlainTextValue[spliceStart]) {
+      while (plainTextValue[spliceStart] === oldPlainTextValue[spliceStart]) {
         spliceStart++;
+      } // find end of diff
+
+
+      var spliceEndOfNew = plainTextValue.length;
+      var spliceEndOfOld = oldPlainTextValue.length;
+
+      while (plainTextValue[spliceEndOfNew - 1] === oldPlainTextValue[spliceEndOfOld - 1]) {
+        spliceEndOfNew--;
+        spliceEndOfOld--;
       } // extract auto-corrected insertion
 
 
-      insert = plainTextValue.slice(spliceStart, selectionEndAfter); // find index of the unchanged remainder
+      insert = plainTextValue.slice(spliceStart, spliceEndOfNew); // find index of the unchanged remainder
 
-      spliceEnd = oldPlainTextValue.lastIndexOf(plainTextValue.substring(selectionEndAfter)); // re-map the corrected indices
+      spliceEnd = spliceEndOfOld >= spliceStart ? spliceEndOfOld : selectionEndAfter; // re-map the corrected indices
 
       mappedSpliceStart = mapPlainTextIndex(value, config, spliceStart, 'START');
       mappedSpliceEnd = mapPlainTextIndex(value, config, spliceEnd, 'END');

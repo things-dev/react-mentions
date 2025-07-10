@@ -70,14 +70,13 @@ var _toConsumableArray = _interopDefault(require("@babel/runtime/helpers/toConsu
   var insert = plainTextValue.slice(selectionStartBefore, selectionEndAfter), spliceStart = Math.min(selectionStartBefore, selectionEndAfter), spliceEnd = selectionEndBefore;
   selectionStartBefore === selectionEndAfter && (spliceEnd = Math.max(selectionEndBefore, selectionStartBefore + lengthDelta));
   var mappedSpliceStart = mapPlainTextIndex(value, config, spliceStart, "START"), mappedSpliceEnd = mapPlainTextIndex(value, config, spliceEnd, "END"), controlSpliceStart = mapPlainTextIndex(value, config, spliceStart, "NULL"), controlSpliceEnd = mapPlainTextIndex(value, config, spliceEnd, "NULL"), willRemoveMention = null === controlSpliceStart || null === controlSpliceEnd, newValue = spliceString(value, mappedSpliceStart, mappedSpliceEnd, insert);
-  if (!willRemoveMention) {
-    var controlPlainTextValue = getPlainText(newValue, config);
-    if (controlPlainTextValue !== plainTextValue) {
-      for (spliceStart = 0; plainTextValue[spliceStart] === controlPlainTextValue[spliceStart]; ) spliceStart++;
-      insert = plainTextValue.slice(spliceStart, selectionEndAfter), spliceEnd = oldPlainTextValue.lastIndexOf(plainTextValue.substring(selectionEndAfter)), 
-      mappedSpliceStart = mapPlainTextIndex(value, config, spliceStart, "START"), mappedSpliceEnd = mapPlainTextIndex(value, config, spliceEnd, "END"), 
-      newValue = spliceString(value, mappedSpliceStart, mappedSpliceEnd, insert);
-    }
+  if (!willRemoveMention && getPlainText(newValue, config) !== plainTextValue) {
+    for (spliceStart = 0; plainTextValue[spliceStart] === oldPlainTextValue[spliceStart]; ) spliceStart++;
+    for (var spliceEndOfNew = plainTextValue.length, spliceEndOfOld = oldPlainTextValue.length; plainTextValue[spliceEndOfNew - 1] === oldPlainTextValue[spliceEndOfOld - 1]; ) spliceEndOfNew--, 
+    spliceEndOfOld--;
+    insert = plainTextValue.slice(spliceStart, spliceEndOfNew), spliceEnd = spliceEndOfOld >= spliceStart ? spliceEndOfOld : selectionEndAfter, 
+    mappedSpliceStart = mapPlainTextIndex(value, config, spliceStart, "START"), mappedSpliceEnd = mapPlainTextIndex(value, config, spliceEnd, "END"), 
+    newValue = spliceString(value, mappedSpliceStart, mappedSpliceEnd, insert);
   }
   return newValue;
 }, findStartOfMentionInPlainText = function(value, config, indexInPlainText) {
